@@ -63,3 +63,18 @@ jobs:
           command: |
             . venv/bin/activate
              pytest
+
+workflows:
+  version: 2.1
+
+  feature_branch:
+    jobs:
+      - build:
+          filters:
+              branches:
+                ignore:
+                  - master
+                  - develop
+      - test:
+          requires:
+            - build
